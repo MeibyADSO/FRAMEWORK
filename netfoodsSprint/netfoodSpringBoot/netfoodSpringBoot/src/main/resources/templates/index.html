@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Inicio</h1>
+        <a th:href="@{/agregar}">Crear Persona</a>
+        <div th:if="${clientes != null and !clientes.empty}">
+            <table border="1">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.nombre}">Mostrar Nombre</td>
+                    <td th:text="${cliente.email}">Mostrar Email</td>
+                    <td th:text="${cliente.telefono}">Mostrar Teléfono</td>
+                    <td><a th:href="@{/editar/} + ${cliente.idCliente}" th:text="Editar"/></td>
+                    <td><a th:href="@{/eliminar(idCliente=${cliente.idCliente})}" th:text="Eliminar"/></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${clientes == null or clientes.empty}">
+            La lista de clentes está vacía
+        </div>
+        
+    </body>
+</html>
